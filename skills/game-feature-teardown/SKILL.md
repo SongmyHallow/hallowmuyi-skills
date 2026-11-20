@@ -40,6 +40,7 @@ description: 拆解游戏中具体功能/系统的设计，产出带实机截图
 9. **出图**：数据类优先图形化（阶梯/区间/占比/流程/关系）；每图标题写结论、图注标口径与证据；无可信数据不画示意数据图。截图 2–5 张，用 `<figure>` + `<figcaption>`（含证据编号）。
 10. **生成 HTML**：`python3 scripts/build_html.py <md> --title "…" --subtitle "…" --meta "品类;版本;日期;N 条证据" --out <html>`。自动给出侧边栏目录（锚定 + 高亮跟随）、暗/浅主题开关（含视觉块与图表双版本）、强调色。
 11. **自检与交付**：`python3 scripts/check_report.py <md>` 无错再交；默认交 HTML。要进飞书时读 `lark-doc/SKILL.md`：原生标题表格 + `<img path="@./assets/x.jpg"/>` + 关键视觉 `<html5-block>`（`build_html.py --block`，≤500KB，禁 base64）。
+12. **归档入库**（默认执行，除非用户说不入库）：按 `references/lark-intake.md`——文档迁入 `game-library/<产品>/03_素材与参考`，并在「游戏资料索引」加一行；加行前先查同产品最新版本，报告版本落后要标注。
 
 ## 原则
 
@@ -64,5 +65,6 @@ description: 拆解游戏中具体功能/系统的设计，产出带实机截图
 - `references/teardown-dimensions.md` — 维度观察点（含系统位置图、匹配/身份机制）
 - `references/report-template.md` — 六段式模板、图表规范
 - `references/evidence-and-sourcing.md` — 分级、时间校验、冲突登记、竞品取证
+- `references/lark-intake.md` — 飞书归档：产品目录、迁移命令、索引表字段规范
 - `scripts/theme.css` / `block.css` — 页面与飞书块样式（改样式只动这里）
 - `scripts/build_html.py` / `scaffold_report.py` / `check_report.py`
