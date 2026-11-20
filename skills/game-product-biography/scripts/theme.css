@@ -1,0 +1,141 @@
+/* 游戏产品传记 · 暗色主题（可切换浅色） */
+:root{
+  --bg:#0b0e13; --bg-2:#11151c; --panel:#151a23; --panel-2:#1b212c;
+  --line:#242b37; --line-2:#2f3846;
+  --text:#e9edf3; --text-2:#c3cbd6; --text-3:#8b95a5;
+  --gold:#e3b341; --gold-dim:#8a6a24; --cyan:#4cc9c0; --red:#e05d5d; --green:#5ec27a;
+  --shadow:0 18px 50px rgba(0,0,0,.45);
+  --sidebar:#0d1117;
+}
+:root[data-theme="light"]{
+  --bg:#f6f4ef; --bg-2:#fffdf8; --panel:#ffffff; --panel-2:#f1eee6;
+  --line:#e2ddd2; --line-2:#d3ccbe;
+  --text:#1d2026; --text-2:#3f4550; --text-3:#6d7480;
+  --gold:#a97a10; --gold-dim:#c9a24a; --cyan:#0f8c84; --red:#c0392b; --green:#2f8f4e;
+  --shadow:0 14px 40px rgba(35,30,15,.10);
+  --sidebar:#efece3;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; background:var(--bg); color:var(--text);
+  font-family:"PingFang SC","Noto Sans CJK SC","Microsoft YaHei",sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+.layout{display:grid; grid-template-columns:248px minmax(0,1fr); min-height:100vh}
+.sidebar{
+  position:sticky; top:0; height:100vh; overflow-y:auto;
+  background:var(--sidebar); border-right:1px solid var(--line); padding:26px 18px 40px;
+}
+.sidebar b{display:block; font:600 11px/1.2 "SF Mono",Menlo,monospace; letter-spacing:.18em; color:var(--text-3); margin-bottom:16px}
+.toc{display:flex; flex-direction:column; gap:2px}
+.toc a{
+  display:block; padding:7px 10px; border-left:2px solid transparent; border-radius:0 4px 4px 0;
+  color:var(--text-2); text-decoration:none; font-size:13.5px; line-height:1.45;
+  transition:background .15s,color .15s,border-color .15s;
+}
+.toc a:hover{background:var(--panel-2); color:var(--text)}
+.toc a.l2{font-size:12.5px; color:var(--text-3); padding-left:22px}
+.toc a.active{border-left-color:var(--gold); background:var(--panel-2); color:var(--gold); font-weight:600}
+.content{max-width:920px; padding:52px 56px 96px; margin:0 auto; width:100%}
+.progress{position:fixed; left:0; top:0; height:2px; width:0; background:linear-gradient(90deg,var(--gold),var(--cyan)); z-index:30}
+.hero{border-bottom:1px solid var(--line); padding-bottom:30px; margin-bottom:38px}
+.kicker{font:600 11px/1 "SF Mono",Menlo,monospace; letter-spacing:.22em; color:var(--gold); margin-bottom:16px}
+h1{font-size:clamp(28px,4vw,44px); line-height:1.22; margin:0 0 14px; letter-spacing:-.01em}
+.sub{color:var(--text-2); font-size:16.5px; line-height:1.75; margin:0 0 18px; max-width:44em}
+.meta{display:flex; flex-wrap:wrap; gap:8px}
+.meta span{font-size:12px; color:var(--text-3); background:var(--panel); border:1px solid var(--line); padding:5px 9px; border-radius:3px}
+.lead{background:var(--panel); border:1px solid var(--line); border-left:3px solid var(--gold); padding:18px 22px; margin:0 0 34px; border-radius:0 6px 6px 0}
+.lead p{margin:0; color:var(--text); font-size:15.5px; line-height:1.85}
+h2{font-size:24px; line-height:1.35; margin:56px 0 18px; padding-left:14px; border-left:4px solid var(--gold)}
+h2:first-of-type{margin-top:0}
+h3{font-size:18px; line-height:1.4; margin:32px 0 12px; color:var(--gold)}
+h4{font-size:15px; margin:20px 0 8px; color:var(--text)}
+p{color:var(--text-2); line-height:1.9; margin:0 0 14px; font-size:15.5px}
+p b,li b{color:var(--text)}
+ul,ol{color:var(--text-2); line-height:1.85; padding-left:22px; margin:0 0 16px; font-size:15.5px}
+li{margin-bottom:7px}
+blockquote{margin:18px 0; padding:12px 18px; background:var(--panel); border-left:3px solid var(--line-2); color:var(--text-2); border-radius:0 5px 5px 0}
+code{font-family:"SF Mono",Menlo,monospace; font-size:13px; background:var(--panel-2); padding:2px 5px; border-radius:3px; color:var(--gold)}
+a{color:var(--cyan); text-decoration:none}
+a:hover{text-decoration:underline}
+table{border-collapse:collapse; width:100%; margin:18px 0 24px; font-size:14px; background:var(--panel); border:1px solid var(--line)}
+th,td{border:1px solid var(--line); padding:9px 11px; text-align:left; vertical-align:top; line-height:1.65}
+th{background:var(--panel-2); color:var(--text); font-weight:600; white-space:nowrap}
+td{color:var(--text-2)}
+img{max-width:100%; height:auto; display:block}
+figure{margin:24px 0 30px}
+figure img{border:1px solid var(--line); border-radius:5px; background:var(--panel)}
+figcaption{font-size:12.5px; color:var(--text-3); line-height:1.7; margin-top:8px}
+.chart{width:100%}
+
+/* 里程碑节点卡 */
+.node{
+  background:var(--panel); border:1px solid var(--line); border-top:3px solid var(--line-2);
+  border-radius:0 0 7px 7px; padding:22px 24px 18px; margin:22px 0 30px; box-shadow:var(--shadow);
+}
+.node.peak{border-top-color:var(--gold)}
+.node.trough{border-top-color:var(--red)}
+.node.turn{border-top-color:var(--cyan)}
+.node.event{border-top-color:var(--line-2)}
+.node-head{display:flex; flex-wrap:wrap; align-items:baseline; gap:10px; margin-bottom:8px}
+.badge{font-size:11.5px; letter-spacing:.08em; padding:3px 8px; border-radius:2px; font-weight:600}
+.badge.peak{background:rgba(227,179,65,.14); color:var(--gold)}
+.badge.trough{background:rgba(224,93,93,.14); color:var(--red)}
+.badge.turn{background:rgba(76,201,192,.14); color:var(--cyan)}
+.badge.event{background:var(--panel-2); color:var(--text-3)}
+.node time{font:600 12px/1.4 "SF Mono",Menlo,monospace; color:var(--text-3)}
+.node-title{font-size:20px; font-weight:700; color:var(--text); line-height:1.4; margin:0}
+.verdict{color:var(--text); font-size:15px; line-height:1.8; margin:6px 0 14px}
+.metrics{display:flex; flex-wrap:wrap; gap:10px; margin:0 0 16px}
+.metrics div{background:var(--panel-2); border:1px solid var(--line); padding:8px 12px; border-radius:4px; min-width:120px}
+.metrics span{display:block; font-size:11.5px; color:var(--text-3); margin-bottom:2px}
+.metrics strong{font-size:15px; color:var(--text); font-weight:600}
+.node-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; border-top:1px solid var(--line); padding-top:16px}
+.node-grid h4{margin:0 0 6px; font-size:12px; letter-spacing:.1em; color:var(--gold); font-weight:600}
+.node-grid p{font-size:14px; line-height:1.8; margin:0; color:var(--text-2)}
+.node-ev{margin-top:14px; font-size:11.5px; color:var(--text-3)}
+
+/* 年表（纵向时间轴） */
+.timeline{position:relative; margin:10px 0 28px; padding:8px 0 0 34px}
+.timeline::before{content:""; position:absolute; left:10px; top:10px; bottom:2px; width:2px; background:var(--line-2)}
+.tl-item{position:relative; padding:0 0 24px}
+.tl-dot{position:absolute; left:-29px; top:3px; width:12px; height:12px; border-radius:50%; background:var(--text-3); border:2px solid var(--bg)}
+.tl-item.peak .tl-dot{background:var(--gold)}
+.tl-item.trough .tl-dot{background:var(--red)}
+.tl-item.turn .tl-dot{background:var(--cyan)}
+.tl-period{font:600 11.5px/1.4 "SF Mono",Menlo,monospace; color:var(--text-3); margin-bottom:3px}
+.tl-title{font-size:15.5px; font-weight:700; color:var(--text); line-height:1.4; margin-bottom:5px}
+.tl-desc{font-size:13.5px; color:var(--text-2); line-height:1.75; max-width:48em}
+
+/* 备注与证据 */
+.takeaway{display:grid; gap:12px; margin:18px 0 26px}
+.takeaway div{background:var(--panel); border:1px solid var(--line); border-left:3px solid var(--cyan); padding:14px 18px; border-radius:0 5px 5px 0}
+.takeaway b{display:block; color:var(--text); margin-bottom:5px}
+.takeaway p{margin:0; font-size:14.5px}
+.warn{background:rgba(224,93,93,.08); border:1px solid rgba(224,93,93,.28); padding:12px 16px; border-radius:4px; color:var(--text-2); font-size:14px; line-height:1.8; margin:16px 0}
+
+.theme-toggle{
+  position:fixed; right:22px; top:18px; z-index:40; cursor:pointer;
+  background:var(--panel); color:var(--text-2); border:1px solid var(--line-2);
+  padding:7px 12px; border-radius:4px; font-size:12px; font-family:inherit;
+}
+.theme-toggle:hover{border-color:var(--gold); color:var(--gold)}
+.totop{position:fixed; right:24px; bottom:26px; z-index:40; width:38px; height:38px; border-radius:50%;
+  background:var(--panel); border:1px solid var(--line-2); color:var(--text-3); cursor:pointer; display:none; font-size:16px}
+.totop:hover{color:var(--gold); border-color:var(--gold)}
+
+@media (max-width:980px){
+  .layout{grid-template-columns:1fr}
+  .sidebar{position:relative; height:auto; border-right:0; border-bottom:1px solid var(--line); padding:18px}
+  .toc{max-height:190px; overflow-y:auto}
+  .content{padding:32px 20px 72px}
+  .node-grid{grid-template-columns:1fr}
+  h1{font-size:28px}
+}
+@media print{
+  .sidebar,.theme-toggle,.totop,.progress{display:none}
+  .layout{display:block}
+  .content{max-width:none; padding:0}
+  body{background:#fff; color:#111}
+}
